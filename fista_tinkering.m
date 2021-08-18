@@ -1,12 +1,10 @@
 Iclean = double(imread('cameraman.tif'));
-[row,col] = size(Iclean);
+[row, col] = size(Iclean);
+sigma = 20;
+Inoisy = Iclean+sigma.*randn(size(Iclean));
+% Inoisy = imnoise(Iclean,'gaussian',0,15) ;%awgn(Iclean,15);
 
 % imshow(uint8(Iclean))
-
-% Inoisy = imnoise(Iclean,'gaussian',0,15) ;%awgn(Iclean,15);
-sigma=20;
-Inoisy=Iclean+sigma.*randn(size(Iclean));
-
 % imshow(uint8(Inoisy))
 PSNR_Noisy = 10 * log10(row * col * 255^2 / sum(sum((Inoisy - Iclean).^2)) );
 
